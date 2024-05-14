@@ -1,0 +1,52 @@
+Style Sheet for C Programs
+
+Author: Steven Nava
+
+Date: 5/13/2024
+
+------------------------------------------
+
+Program Box Styling
+
+ /**********************************************\
+ *  						*
+ *  Name:    Program Name			*
+ *  						*
+ *  Author:  Steven Nava			*
+ *						*
+ *  Purpose: Program purpose goes here.		*
+ *						*
+ *  Usage:   How to use the program.		*
+ *						*
+ *  Notes:   Any notes. (optional)		*
+ *						*
+ \**********************************************/
+
+------------------------------------------
+
+Important Comment for Long Section
+
+ /*
+  * This is a longer comment explaining the 
+  * next large block of code and how it works
+  * or any notes it may need.
+  */
+
+------------------------------------------
+
+Single Line Comment Explaining Code Snippet
+
+ /* This is a single line comment explaining a short code snippet. *./
+
+------------------------------------------
+
+Warning Statement for Important Section
+
+ /****************************************					
+  ****************************************
+  ****	WARNING statement!!	      ****
+  ****	Used for important warnings   ****
+  ****  To grab attention!!	      ****
+  ****************************************
+  ****************************************/
+
