@@ -12,7 +12,7 @@
  *		 and print out the volume of that size		*
  *		 sphere.					*
  *		 						*
- *	Notes:	 Volume of sphere: 4/3 * radius ^ 3		*
+ *	Notes:	 Volume of sphere: 4/3 * pi * radius ^ 3	*
  *								*
  ****************************************************************/
 
