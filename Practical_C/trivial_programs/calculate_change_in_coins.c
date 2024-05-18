@@ -6,13 +6,13 @@
  *							*
  *	Purpose: This program calculates the 		*
  *		 equivalent change in quarters, dimes,	*
- *		 nickels, and pennies given an amount	*
- *		 less than $1.00.			*
+ *		 nickels, and pennies given a currency	*
+ *		 amount.				*
  *		 					*
- *	Usage:	 Enter an amount less than $1.00 in	*
- *		 the format .## where ## represents	*
- *		 numbers. The program will calculate	*
- *		 the equivalent amount in change and 	*
+ *	Usage:	 Enter a currency amount either in	*
+ *		 whole dollars or dollard and cents.	*
+ *		 The program will calculate the		*
+ *		 equivalent amount in change and 	*
  *		 print out the numbers of quarters,	*
  *		 dimes, nickels, and pennies.		*
  *		 					*
@@ -24,22 +24,27 @@
 
 int main() {
 	/* variable declarations */
-	char line[100], clean_input_string[100];
+	char line[100], 
+	clean_input_string[100];
 	int number_of_quarters, 
-	number_of_dimes,number_of_nickels, 
+	number_of_dimes,
+	number_of_nickels, 
 	number_of_pennies, 
-	cents_amount_entered_in, amount_left,
-	found_numbers = 0, improper_characters = 0, 
-	length_of_input, proper_decimal_position;
+	cents_amount_entered_in, 
+	amount_left,
+	found_numbers = 0, 
+	improper_characters = 0, 
+	length_of_input, 
+	proper_decimal_position;
 	bool has_cents = false;
 
-	/* prompt for amount of change less than $1.00 */
+	/* prompt for currency amount */
 	printf("Enter in a currency amount to be converted to quarters, dimes, nickels, and pennies: ");
 
 	/* read in input */
 	fgets(line, sizeof(line), stdin);
 
-	/* remove any non-numeric characters */
+	/* store numeric characters in a new array to get total number of cents */
 	int j = 0;
 	for(int i = 0; i < strlen(line); i++) {
 		if(line[i] == '0' ||
@@ -55,6 +60,7 @@ int main() {
 			clean_input_string[j] = line[i];
 			j++;
 			found_numbers++;
+		/* check to see if user entered in dollars and cents or just dollars */
 		} else if (line[i] == '.') {
 			proper_decimal_position = strlen(line) - 4;
 			if (i == proper_decimal_position) {
@@ -62,20 +68,30 @@ int main() {
 			} else {
 				improper_characters++;
 			} 
-		/* if character is part of a normal keyboard charset */
+		/* if entered in character is part of a normal keyboard charset */
 		} else if ((int)line[i] >= 32 && (int)line[i] <= 126) {
 			improper_characters++;
 		}
 	}
+	/* 
+	 * at the end of the loop j is 1 character beyond the last number
+	 * added to the clean_input_string array. adding proper string
+	 * terminating character
+	 */
 	clean_input_string[j] = '\0';
 
 	while(found_numbers < 1 || improper_characters > 0) {
 		printf("\nA valid amount was not entered in. The amount must be less than $1.00 in format '.##'. Please try again.\n");
 		printf("Enter in a currency amount to be converted to quarters, dimes, nickels, and pennies: ");
 		fgets(line, sizeof(line), stdin);
+		/* 
+		 * set found_numbers, improper_characters, and clean_input_string iterator
+		 * for each loop
+		 */
 		found_numbers = 0;
 		improper_characters = 0;
 		j = 0;
+		/* store numeric characters in a new array to get total number of cents */
 		for(int i = 0; i < strlen(line); i++) {
 			if(line[i] == '0' ||
 		   	line[i] == '1' ||
@@ -90,6 +106,7 @@ int main() {
 				clean_input_string[j] = line[i];
 				j++;
 				found_numbers++;
+			/* check to see if user entered in dollars and cents or just dollars */
 			} else if (line[i] == '.') {
 				proper_decimal_position = strlen(line) - 4;
 				if (i == proper_decimal_position) {
@@ -97,36 +114,30 @@ int main() {
 				} else {
 					improper_characters++;
 				} 
-			/* if character is part of a normal keyboard charset */
+			/* if entered in character is part of a normal keyboard charset */
 			} else if ((int)line[i] >= 32 && (int)line[i] <= 126) {
 				improper_characters++;
 			}
 		}
+		/* 
+		 * at the end of the loop j is 1 character beyond the last number
+		 * added to the clean_input_string array. adding proper string
+		 * terminating character
+		 */
 		clean_input_string[j] = '\0';
 	}
 
 	sscanf(clean_input_string, "%d", &cents_amount_entered_in); 
 	
-	/* check for decimal to see if we are dealing with whole numbers or input has cents */
+	/* 
+	 * check for decimal to see if we are dealing with whole numbers or input has cents 
+	 * if user only entered in whole numbers we must convert to cents by multiplying
+	 * the whole number by 100 to get the total cents
+	 * dollar_amount * 100 (how many cents are in a dollar) = total_cents
+	 */
 	if (has_cents == false) {
-		printf("has cents");
 		cents_amount_entered_in *= 100;
 	}
-
-	/* try to store input into variable */
-	//number_read_status = sscanf(line, "%d", &cents_amount_entered_in);
-
-	/* store all non-numeric characters entered in */
-	//sscanf(line, "%s", &character_eater);
-
-	/* input validation */
-	/*while(number_read_status != 1 || cents_amount_entered_in > 99) {
-		printf("\nA valid amount was not entered in. The amount must be less than $1.00 in format '.##'. Please try again.\n");
-		printf("Enter in an amount less than $1.00 to be converted to quarters, dimes, nickels, and pennies: ");
-		fgets(line, sizeof(line), stdin);
-		number_read_status = sscanf(line, "%d", &cents_amount_entered_in);
-		sscanf(line, "%s", &character_eater);
-	}*/
 
 	/* calculate change in quarters, dimes, nickels, and pennies */
 	number_of_quarters = (cents_amount_entered_in / 25);
