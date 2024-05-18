@@ -6,9 +6,11 @@
  *							*
  *	Purpose: Trivial program to determine letter	*
  *		 grade for a student given a numeric	*
- *		 value and print it out. The numeric	*
- *		 values entered must be between 0 and	*
- *		 100.					*
+ *		 value and print it out. This version	*
+ *		 prints out with a +/- grade as well.	*
+ *		 This program takes in numeric values	*
+ *		 between 0 and 100. Any others will be	*
+ *		 considered invalid.			*
  *							*
  *	Usage:	 Input a numeric grade value. Program	*
  *		 will calculate letter grade and 	*
@@ -21,8 +23,8 @@
 
 int main() {
 	/* variable declaration */
-	char line[100], character_eater[100], letter_grade;
-	int number_read_status, numerical_grade;
+	char line[100], character_eater[100], letter_grade[3];
+	int number_read_status, numerical_grade, remainder_of_division_by_ten;
 
 	/* prompt for numeric grade */
 	printf("Please enter a numerical grade: ");
@@ -47,18 +49,30 @@ int main() {
 
 	/* calculate letter grade */
 	if(numerical_grade > 90) {
-		letter_grade = 'A';
+		strcpy(letter_grade, "A");
 	} else if(numerical_grade > 80) {
-		letter_grade = 'B';
+		strcpy(letter_grade, "B");
 	} else if(numerical_grade > 70) {
-		letter_grade = 'C';
+		strcpy(letter_grade, "C");
 	} else if(numerical_grade > 60) {
-		letter_grade = 'D';
+		strcpy(letter_grade, "D");
 	} else {
-		letter_grade = 'F';
+		strcpy(letter_grade, "F");
+	}
+
+	/* calculate +/- */
+	if(numerical_grade > 60) {
+		/* calculate remainder of division by 10 to determine if a +/- is needed */
+		remainder_of_division_by_ten = numerical_grade % 10;
+
+		if(remainder_of_division_by_ten >= 1 && remainder_of_division_by_ten <= 3) {
+			strcat(letter_grade, "-");
+		} else if(remainder_of_division_by_ten == 0 || (remainder_of_division_by_ten >= 8 && remainder_of_division_by_ten <= 9)) {
+			strcat(letter_grade, "+");
+		}
 	}
 
 	/* print letter grade */
-	printf("\nThe appropriate letter grade for a numerical grade of %d is: %c\n", numerical_grade, letter_grade);
+	printf("\nThe appropriate letter grade for a numerical grade of %d is: %s\n", numerical_grade, letter_grade);
 	return(0); /* exit program with exit code 0 */
 }
