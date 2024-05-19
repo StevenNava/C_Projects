@@ -43,8 +43,8 @@ int main() {
 	int j = 0;
 	for(int i = 0; i < strlen(line); i++) {
 		/* if character is numeric, store it in clean input string to be converted */
-		/* need to handle leading 0's -- can add check for i != 0 for the comparison to 0 */
-		if(line[i] == '0' ||
+		/* cannot start value with leading 0 */
+		if(line[i] == '0' & i != 0 ||
 		   line[i] == '1' ||
 		   line[i] == '2' ||
 		   line[i] == '3' ||
@@ -58,8 +58,16 @@ int main() {
 			clean_input_string[j] = line[i];
 			j++;
 		/* checking for cents while already iterating through characters */
-		} else if (line[i] == '.' && i == strlen(line) - 4) {
+		} else if (line[i] == '.' && i == strlen(line) - 4 && line[i + 1] != '.') {
 			hourly_rate_has_cents = true;
+		} else if (line[i] == '.' && i == strlen(line) - 3 && line[i - 1] != '.') {
+			hourly_rate_has_cents = true;
+			/*
+			 * user entered a value like 11.5 so we are adding a 0 to the end to
+			 * make format it to ##.## like 11.50 so that the calculations below
+			 * work properly
+			 */
+			strcat(line, "0");
 		/* if character is an ascii character that is not 1-9 input is invalid */
 		} else if ((int)line[i] > 32 && (int)line[i] < 127) {
 			input_is_invalid = true;
@@ -79,8 +87,8 @@ int main() {
 		input_is_invalid = false;
 		for(int i = 0; i < strlen(line); i++) {
 			/* if character is numeric, store it in clean input string to be converted */
-			/* need to handle leading 0's -- can add check for i != 0 for the comparison to 0 */
-			if(line[i] == '0' ||
+			/* cannot start value with leading 0 */
+			if(line[i] == '0' && i != 0 ||
 		   	   line[i] == '1' ||
 		   	   line[i] == '2' ||
 		   	   line[i] == '3' ||
@@ -94,8 +102,16 @@ int main() {
 				clean_input_string[j] = line[i];
 				j++;
 			/* checking for cents while already iterating through characters */
-			} else if (line[i] == '.' && i == strlen(line) - 4) {
+			} else if (line[i] == '.' && i == strlen(line) - 4 && line[i + 1] != '.') {
 				hourly_rate_has_cents = true;
+			} else if (line[i] == '.' && i == strlen(line) - 3 && line[i - 1] != '.') {
+				hourly_rate_has_cents = true;
+				/*
+				 * user entered a value like 11.5 so we are adding a 0 to the end to
+				 * make format it to ##.## like 11.50 so that the calculations below
+				 * work properly
+				 */
+				strcat(line, "0");
 			/* if character is an ascii character that is not 1-9 input is invalid */
 			} else if ((int)line[i] > 32 && (int)line[i] < 127) {
 				input_is_invalid = true;
