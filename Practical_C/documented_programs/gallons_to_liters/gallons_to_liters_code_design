@@ -4,11 +4,10 @@ Pseudo-code:
 
 Read in decimal number
 Attempt to validate input
-If invalid
-	Loop
-		Read in decimal number
-		Attempt to validate input
-	End Loop
+Loop while input invalid
+	Read in decimal number
+	Attempt to validate input
+End Loop when input valid
 End if
 Covert gallons to liters
 Display the result
