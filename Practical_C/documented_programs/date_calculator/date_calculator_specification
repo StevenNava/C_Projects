@@ -1,0 +1,43 @@
+			 Date Calculator
+		    Performs various date math
+			  May 19, 2024
+			   Steven Nava
+
+This is a preliminary specification.
+
+Date Calculator is a program that allows the user to perform many different
+date math functions. 
+Functions included are:
+	- Determine number of days/weeks/months/years between two dates
+	- Determine number of years + months + days between two dates
+	- Determine date when a given number of days/weeks/months/years are added/subtracted
+
+When the program is run, it will display a menu. The user can select what the
+function they want to execute from the menu. They will enter in the information
+prompted. The results of the function will then be displayed to the user and they
+will be asked if they would like to perform another function. If 'y' is entered
+then they will be taken back to the menu to perform another function.
+
+Menu: 
+	/*======================================================================\
+	|=======================================================================|						|									|
+	|	Date Calculator							|
+	|									|
+	|	Select an option below:						|
+	|									|
+	|	1 - Determine the number of days between two dates		|
+	|	2 - Determine the number of weeks between two dates		|
+	|	3 - Determine the number of months between two dates		|
+	|	4 - Determine the number of years between two dates		|
+	|	5 - Determine the date given a +/- number of days		|
+	|	6 - Determine the date given a +/- number of weeks 		|
+	|	7 - Determine the date given a +/- number of months		|
+	|	8 - Determine the date given a +/- number of years		|
+	|	9 - Exit the program						|
+	|									|
+	|=======================================================================|
+	\======================================================================*/
+
+Examples:
+	
+	## To be added
