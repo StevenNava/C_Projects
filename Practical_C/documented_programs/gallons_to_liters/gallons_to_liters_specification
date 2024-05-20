@@ -1,0 +1,19 @@
+			Gallons to Liters
+		Converts Provided Gallons to Liters
+			  May 19, 2024
+			   Steven Nava
+
+This is a preliminary specification.
+
+Gallons to Liters is a program that allows the user to convert any number
+of gallons, inlcuding partial gallons, to liters. The program will use
+the formula (1 gallon = 3.78541178 liters) to perform the conversion.
+
+When the program is run, it will prompt the user to enter in the amount
+of gallons that they would like to be converted. It will then print out the
+number of liters that corresponds to the entered in amount of gallons.
+
+Example:
+	Enter in the number of gallons to be converted to liters: 1.5
+	
+	The number of liters equivalent to 1.5 gallons is approximately 5.69 liters.
