@@ -1,0 +1,53 @@
+Date Calculator code design
+
+Code design done in pseudo-code
+
+Loop
+	print menu
+	prompt for selection
+	read in selection
+	if selection is calculate days between two dates
+		prompt for date 1
+		read in date 1 input
+		input validation
+		prompt for date 2
+		read in date 2 input
+		input validation
+		store the year value for date 1 into a year variable
+		store the year value for date 2 into a year variable
+		store the month value for date 1 into a month variable
+		store the month value for date 2 into a month variable
+		store the date value for date 1 into a date variable
+		store the date value for date 2 into a date variable
+		determine if year values are the same
+		if year values are the same
+			determine if the month values are the same
+			if the month values are the same
+				subtract the date values
+				if result less than 0 multiply by -1
+			else
+				subtract date value from month number of days to get total number of days
+				add 1 to month 1 variable
+				While Loop current month is less than month 2
+					add month number of days for current month to total number of days
+					add 1 to current month
+				End Loop
+				add date value to total number of days
+		else 
+			subtract date value from month number of days to get total number of days
+			add 1 to month 1 variable
+			While Loop current year value is less than year 2
+				While Loop current month is less than month 12
+					add month number of days for current month to total number of days
+					add 1 to current month
+				End Loop
+			End Loop
+			While Loop current month is less than month 2
+				add month number of days for current month to total number of days
+				add 1 to current month
+			End Loop
+			add date value to total number of days
+		print total number of days
+	end if 
+					
+

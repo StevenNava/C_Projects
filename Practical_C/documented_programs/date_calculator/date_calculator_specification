@@ -40,4 +40,8 @@ Menu:
 
 Examples:
 	
-	## To be added
+	Enter a selection: 1
+	Enter date 1 in the format mm/dd/yy: 06/19/1988
+	Enter date 2 in the format mm/dd/yy: 06/01/1988
+
+	The number of days between 06/19/1988 and 06/01/1988 is: 18 days
