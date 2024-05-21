@@ -18,6 +18,8 @@
  *		 					*
  ********************************************************/
 
+// TODO: Don't handle months over 12
+
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
@@ -69,14 +71,25 @@ int main() {
 	/* prompt for date 1 and read in input */
 	printf("Enter the first date in format (dd/mm/yyyy): \n");
 	fgets(line, sizeof(line), stdin);
-	/* strlen(line) -1 compares all but the '\0' character */
+	/* strlen(line) -1 compares all but the '\n' character */
 	for(int i = 0; i < strlen(line) - 1; i++) {
 		if(i == 2 || i == 5) {
 			if (line[i] != '/') {
 				invalid_input = true;
 				break;
 			}
-		} else if (line[i] != '0' &&
+		} else if (i == 0) {
+			if(line[i] != '0' && line[i] != '1') {
+				invalid_input = true;
+				break;
+			}
+		} else if(i == 1 && line[0] == '1' && (line[i] != '0' && line[i] != '1' && line[i] != '2')) {
+			invalid_input = true;
+			break;
+		} else if(i== 1 && line[0] == '0' && line[i] == '0') {
+			invalid_input = true;
+			break;
+		} else if(line[i] != '0' &&
 			   line[i] != '1' &&
 			   line[i] != '2' &&
 			   line[i] != '3' &&
@@ -103,6 +116,17 @@ int main() {
 					invalid_input = true;
 					break;
 				}
+			} else if (i == 0) {
+				if(line[i] != '0' && line[i] != '1') {
+					invalid_input = true;
+					break;
+				}
+			} else if(i == 1 && line[0] == '1' && (line[i] != '0' && line[i] != '1' && line[i] != '2')) {
+				invalid_input = true;
+				break;
+			} else if(i== 1 && line[0] == '0' && line[i] == '0') {
+				invalid_input = true;
+				break;
 			} else if (line[i] != '0' &&
 				   line[i] != '1' &&
 				   line[i] != '2' &&
@@ -148,6 +172,17 @@ int main() {
 				invalid_input = true;
 				break;
 			}
+		} else if (i == 0) {
+			if(line[i] != '0' && line[i] != '1') {
+				invalid_input = true;
+				break;
+			}
+		} else if(i == 1 && line[0] == '1' && (line[i] != '0' && line[i] != '1' && line[i] != '2')) {
+			invalid_input = true;
+			break;
+		} else if(i== 1 && line[0] == '0' && line[i] == '0') {
+			invalid_input = true;
+			break;
 		} else if (line[i] != '0' &&
 			   line[i] != '1' &&
 			   line[i] != '2' &&
@@ -175,6 +210,17 @@ int main() {
 					invalid_input = true;
 					break;
 				}
+			} else if (i == 0) {
+				if(line[i] != '0' && line[i] != '1') {
+					invalid_input = true;
+					break;
+				}
+			} else if(i == 1 && line[0] == '1' && (line[i] != '0' && line[i] != '1' && line[i] != '2')) {
+				invalid_input = true;
+				break;
+			} else if(i== 1 && line[0] == '0' && line[i] == '0') {
+				invalid_input = true;
+				break;
 			} else if (line[i] != '0' &&
 				   line[i] != '1' &&
 				   line[i] != '2' &&
