@@ -102,6 +102,9 @@ int main() {
 			  line[i] != '1') {
 			invalid_input = true;
 			break;
+		} else if(i == 4 && line[i] == '0' && line[3] == '0') {
+			invalid_input = true;
+			break;
 		} else if(line[i] != '0' &&
 			  line[i] != '1' &&
 			  line[i] != '2' &&
@@ -153,6 +156,9 @@ int main() {
 			} else if(i == 4 && ((line[0] == '0' && (line[1] == '1' || line[1] == '3' || line[1] == '5' || line[1] == '7' ||
 				  line[1] == '8')) || (line[0] == '1' && (line[1] == '0' || line[1] == '2'))) && line[3] == '3' && line[i] != '0' &&
 			 	  line[i] != '1') {
+				invalid_input = true;
+				break;
+			} else if(i == 4 && line[i] == '0' && line[3] == '0') {
 				invalid_input = true;
 				break;
 			} else if (line[i] != '0' &&
@@ -226,6 +232,9 @@ int main() {
 			  line[i] != '1') {
 			invalid_input = true;
 			break;
+		} else if(i == 4 && line[i] == '0' && line[3] == '0') {
+			invalid_input = true;
+			break;
 		} else if (line[i] != '0' &&
 			   line[i] != '1' &&
 			   line[i] != '2' &&
@@ -277,6 +286,9 @@ int main() {
 			} else if(i == 4 && ((line[0] == '0' && (line[1] == '1' || line[1] == '3' || line[1] == '5' || line[1] == '7' ||
 				  line[1] == '8')) || (line[0] == '1' && (line[1] == '0' || line[1] == '2'))) && line[3] == '3' && line[i] != '0' &&
 			 	  line[i] != '1') {
+				invalid_input = true;
+				break;
+			} else if(i == 4 && line[i] == '0' && line[3] == '0') {
 				invalid_input = true;
 				break;
 			} else if (line[i] != '0' &&
