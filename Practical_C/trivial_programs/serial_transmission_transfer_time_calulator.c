@@ -50,15 +50,19 @@ int main() {
 	fgets(line, sizeof(line), stdin);
 	
 	/* check for valid units of measurement */
-	strcpy(unit_of_measure, line);
-	if(strcmp(unit_of_measure, "bytes\n") == 0) {
-		size_of_file_in_bytes = size_of_file;
-	} else if(strcmp(unit_of_measure, "KB\n")) {
-		size_of_file_in_bytes = size_of_file * 1024;
-	} else if(strcmp(unit_of_measure, "MB") == 0) {
-		size_of_file_in_bytes = size_of_file * 1048576;
-	} else if(strcmp(unit_of_measure, "GB\n")) {
-		size_of_file_in_bytes = size_of_file * 1073741824;
+	if(strlen(line) <= 5) {
+		strcpy(unit_of_measure, line);
+		if(strcmp(unit_of_measure, "bytes\n") == 0) {
+			size_of_file_in_bytes = size_of_file;
+		} else if(strcmp(unit_of_measure, "KB\n")) {
+			size_of_file_in_bytes = size_of_file * 1024;
+		} else if(strcmp(unit_of_measure, "MB") == 0) {
+			size_of_file_in_bytes = size_of_file * 1048576;
+		} else if(strcmp(unit_of_measure, "GB\n")) {
+			size_of_file_in_bytes = size_of_file * 1073741824;
+		} else {
+			size_of_file_in_bytes = -1;
+		}
 	} else {
 		size_of_file_in_bytes = -1;
 	}
@@ -69,14 +73,19 @@ int main() {
 		printf("Enter unit of measurement -- it must be either 'bytes', KB, MB, or GB: ");
 		fgets(line, sizeof(line), stdin);
 	
-		if(strcmp(line, "bytes")) {
-			size_of_file_in_bytes = size_of_file;
-		} else if(strcmp(line, "KB")) {
-			size_of_file_in_bytes = size_of_file * 1024;
-		} else if(strcmp(line, "MB")) {
-			size_of_file_in_bytes = size_of_file * 1048576;
-		} else if(strcmp(line, "GB")) {
-			size_of_file_in_bytes = size_of_file * 1073741824;
+		if(strlen(line) <= 5) {
+			strcpy(unit_of_measure, line);
+			if(strcmp(unit_of_measure, "bytes\n") == 0) {
+				size_of_file_in_bytes = size_of_file;
+			} else if(strcmp(unit_of_measure, "KB\n")) {
+				size_of_file_in_bytes = size_of_file * 1024;
+			} else if(strcmp(unit_of_measure, "MB") == 0) {
+				size_of_file_in_bytes = size_of_file * 1048576;
+			} else if(strcmp(unit_of_measure, "GB\n")) {
+				size_of_file_in_bytes = size_of_file * 1073741824;
+			} else {
+				size_of_file_in_bytes = -1;
+			}
 		} else {
 			size_of_file_in_bytes = -1;
 		}
