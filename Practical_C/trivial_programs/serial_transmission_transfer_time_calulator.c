@@ -25,7 +25,7 @@ int main() {
 	/* variable declaration */
 	char line[100],
 	invalid_characters[100],
-	unit_of_measure[5];
+	unit_of_measure[10];
 	int number_read_successfully,
 	size_of_file,
 	size_of_file_in_bytes;
@@ -50,15 +50,17 @@ int main() {
 	fgets(line, sizeof(line), stdin);
 	
 	/* check for valid units of measurement */
-	if(strlen(line) <= 5) {
+	if(strlen(line) <= 8) {
+		/* removing the \n character */
+		line[strlen(line) - 1] = '\0';
 		strcpy(unit_of_measure, line);
-		if(strcmp(unit_of_measure, "bytes\n") == 0) {
+		if(strcmp(unit_of_measure, "bytes") == 0) {
 			size_of_file_in_bytes = size_of_file;
-		} else if(strcmp(unit_of_measure, "KB\n")) {
+		} else if(strcmp(unit_of_measure, "KB") == 0) {
 			size_of_file_in_bytes = size_of_file * 1024;
 		} else if(strcmp(unit_of_measure, "MB") == 0) {
 			size_of_file_in_bytes = size_of_file * 1048576;
-		} else if(strcmp(unit_of_measure, "GB\n")) {
+		} else if(strcmp(unit_of_measure, "GB") == 0) {
 			size_of_file_in_bytes = size_of_file * 1073741824;
 		} else {
 			size_of_file_in_bytes = -1;
@@ -68,20 +70,21 @@ int main() {
 	}
 
 	/* input validation */
-	while(size_of_file_in_bytes < 0) {
+	while(size_of_file_in_bytes < 8) {
 		printf("\nA valid unit of measure was not entered in. Please try again.\n");
 		printf("Enter unit of measurement -- it must be either 'bytes', KB, MB, or GB: ");
 		fgets(line, sizeof(line), stdin);
 	
-		if(strlen(line) <= 5) {
+		if(strlen(line) <= 10) {
+			line[strlen(line) - 1] = '\0';
 			strcpy(unit_of_measure, line);
-			if(strcmp(unit_of_measure, "bytes\n") == 0) {
+			if(strcmp(unit_of_measure, "bytes") == 0) {
 				size_of_file_in_bytes = size_of_file;
-			} else if(strcmp(unit_of_measure, "KB\n")) {
+			} else if(strcmp(unit_of_measure, "KB") == 0) {
 				size_of_file_in_bytes = size_of_file * 1024;
 			} else if(strcmp(unit_of_measure, "MB") == 0) {
 				size_of_file_in_bytes = size_of_file * 1048576;
-			} else if(strcmp(unit_of_measure, "GB\n")) {
+			} else if(strcmp(unit_of_measure, "GB") == 0) {
 				size_of_file_in_bytes = size_of_file * 1073741824;
 			} else {
 				size_of_file_in_bytes = -1;
