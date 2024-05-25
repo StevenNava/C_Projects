@@ -18,16 +18,17 @@
 *										*
 *********************************************************************************/
 
-#include<stdio.h>
-#include<string.h>
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
 
 int main() {
 	/* variable declaration */
 	char line[100],
 	invalid_characters[100],
 	unit_of_measure[10];
-	int number_read_successfully,
-	size_of_file,
+	int number_read_successfully;
+	long size_of_file,
 	size_of_file_in_bytes;
 	double length_of_time_to_transfer_file_minutes;
 
@@ -41,7 +42,7 @@ int main() {
 		printf("\nA valid whole number for file size was not entered in. Please try again.\n");
 		printf("Enter file size in whole numbers only: ");
 		fgets(line, sizeof(line), stdin);
-		number_read_successfully = sscanf(line, "%d", &size_of_file);
+		number_read_successfully = sscanf(line, "%ld", &size_of_file);
 		sscanf(line, "%s", &invalid_characters);
 	}
 
@@ -51,9 +52,14 @@ int main() {
 	
 	/* check for valid units of measurement */
 	if(strlen(line) <= 8) {
+		/* converting string to uppercase for proper comparison */
+		for(int i = 0; i < strlen(line); i++) {
+			line[i] = toupper(line[i]);
+		}
+
 		/* removing the \n character */
 		line[strlen(line) - 1] = '\0';
-		strcpy(unit_of_measure, line);
+		strcpy(unit_of_measure, (line));
 		if(strcmp(unit_of_measure, "bytes") == 0) {
 			size_of_file_in_bytes = size_of_file;
 		} else if(strcmp(unit_of_measure, "KB") == 0) {
@@ -68,9 +74,8 @@ int main() {
 	} else {
 		size_of_file_in_bytes = -1;
 	}
-
 	/* input validation */
-	while(size_of_file_in_bytes < 8) {
+	while(size_of_file_in_bytes < 0) {
 		printf("\nA valid unit of measure was not entered in. Please try again.\n");
 		printf("Enter unit of measurement -- it must be either 'bytes', KB, MB, or GB: ");
 		fgets(line, sizeof(line), stdin);
@@ -95,11 +100,10 @@ int main() {
 	}
 
 	/* calculate how long it would take (in minutes) to transfer a file of the given size */
-	printf("size %d\n", size_of_file_in_bytes);
 	length_of_time_to_transfer_file_minutes = size_of_file_in_bytes / 960;
 
 	/* print results */
-	printf("\nThe length of time in minutes that it would take to transfer a file of size %d %s is %.2lf minutes.\n", size_of_file, unit_of_measure, length_of_time_to_transfer_file_minutes);
+	printf("\nThe length of time in minutes that it would take to transfer a file of size %ld %s is %.2lf minutes.\n", size_of_file, unit_of_measure, length_of_time_to_transfer_file_minutes);
 
 	return 0;
 }
