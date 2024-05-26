@@ -32,6 +32,7 @@ int main() {
 	year_string[5];
 	int month_number_1,
 	month_number_2,
+	temp_month,
 	date_number_1,
 	date_number_2,
 	year_number_1,
@@ -335,6 +336,13 @@ int main() {
 				total_number_of_days += (date_number_1 - date_number_2);
 			}
 		} else {
+			/* put  smaller month in month 1 position */
+			if(month_number_2 < month_number_1) {
+				temp_month = month_number_1;
+				month_number_1 = month_number_2;
+				month_number_2 = temp_month;
+			}
+
 			if (month_number_1 == 2) {
 				if(year_number_1 % 100 == 0 && year_number_1 % 400 != 0) {
 					total_number_of_days += (28 - date_number_1);
@@ -382,6 +390,37 @@ int main() {
 
 			total_number_of_days += date_number_2;
 		}
+	} else {
+		if(month_number_1 == month_number_2) {
+			if(date_number_1 - date_number_2 < 0) {
+				total_number_of_days += (date_number_2 - date_number_1);
+			} else {
+				total_number_of_days += (date_number_1 - date_number_2);
+			}
+		} else {
+			if (month_number_1 == 2) {
+				if(year_number_1 % 100 == 0 && year_number_1 % 400 != 0) {
+					total_number_of_days += (28 - date_number_1);
+				} else if (year_number_1 % 4 == 0) {
+					total_number_of_days += (29 - date_number_1);
+				} else {
+					total_number_of_days += (28 - date_number_1);
+				}
+			}
+			else if(month_number_1 == 1 ||
+			   month_number_1 == 3 ||
+			   month_number_1 == 5 ||
+			   month_number_1 == 7 ||
+			   month_number_1 == 8 ||
+			   month_number_1 == 10 ||
+			   month_number_1 == 12 ) {
+				total_number_of_days += (months_with_thirty_one_days - date_number_1);
+			} else {
+				total_number_of_days += (months_with_thirty_days - date_number_1);
+			}
+			month_number_1++;
+		}		
+			
 	}
 	printf("\nDate#1: %d\n", date_number_1);
 	printf("\nDate#2: %d\n", date_number_2);
