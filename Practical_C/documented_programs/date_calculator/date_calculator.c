@@ -35,8 +35,10 @@ int main() {
 	temp_month,
 	date_number_1,
 	date_number_2,
+	temp_date,
 	year_number_1,
 	year_number_2,
+	temp_year,
 	months_with_thirty_days = 30,
 	months_with_thirty_one_days = 31,
 	february_non_leap_year_days = 28,
@@ -336,11 +338,14 @@ int main() {
 				total_number_of_days += (date_number_1 - date_number_2);
 			}
 		} else {
-			/* put  smaller month in month 1 position */
+			/* put smaller date in date 1 position */
 			if(month_number_2 < month_number_1) {
 				temp_month = month_number_1;
 				month_number_1 = month_number_2;
 				month_number_2 = temp_month;
+				temp_date = date_number_1;
+				date_number_1 = date_number_2;
+				date_number_2 = temp_date;
 			}
 
 			if (month_number_1 == 2) {
@@ -391,35 +396,96 @@ int main() {
 			total_number_of_days += date_number_2;
 		}
 	} else {
-		if(month_number_1 == month_number_2) {
-			if(date_number_1 - date_number_2 < 0) {
-				total_number_of_days += (date_number_2 - date_number_1);
-			} else {
-				total_number_of_days += (date_number_1 - date_number_2);
-			}
+		/* put  smaller month in month 1 position */
+		if(year_number_2 < year_number_1) {
+			temp_year = year_number_1;
+			year_number_1 = year_number_2;
+			year_number_2 = temp_year;
+			temp_month = month_number_1;
+			month_number_1 = month_number_2;
+			month_number_2 = temp_month;
+			temp_date = date_number_1;
+			date_number_1 = date_number_2;
+			date_number_2 = temp_date;
+		}
+
+		if(month_number_1 == 1 ||
+		   month_number_1 == 3 ||
+		   month_number_1 == 5 ||
+		   month_number_1 == 7 ||
+		   month_number_1 == 8 ||
+		   month_number_1 == 10 ||
+		   month_number_1 == 12 ) {
+			total_number_of_days += (months_with_thirty_one_days - date_number_1);
+		} else if(month_number_1 != 2) {
+			total_number_of_days += (months_with_thirty_days - date_number_1);
+		} else if(year_number_1 % 100 == 0 && year_number_1 % 400 != 0) {
+			total_number_of_days += 28;
+		} else if(year_number_1 % 4 != 0) {
+			total_number_of_days += 28;
 		} else {
-			if (month_number_1 == 2) {
-				if(year_number_1 % 100 == 0 && year_number_1 % 400 != 0) {
-					total_number_of_days += (28 - date_number_1);
-				} else if (year_number_1 % 4 == 0) {
-					total_number_of_days += (29 - date_number_1);
-				} else {
-					total_number_of_days += (28 - date_number_1);
-				}
-			}
-			else if(month_number_1 == 1 ||
+			total_number_of_days += 29;
+		}
+		
+		if(month_number_1 == 12) {
+			year_number_1++;
+			month_number_1 = 1;
+		} else {
+			month_number_1++;
+		}
+
+		while(year_number_1 < year_number_2) {
+			if(month_number_1 == 1 ||
 			   month_number_1 == 3 ||
 			   month_number_1 == 5 ||
 			   month_number_1 == 7 ||
 			   month_number_1 == 8 ||
 			   month_number_1 == 10 ||
 			   month_number_1 == 12 ) {
-				total_number_of_days += (months_with_thirty_one_days - date_number_1);
+				total_number_of_days += months_with_thirty_one_days;
+			} else if(month_number_1 != 2) {
+				total_number_of_days += months_with_thirty_days;
+			} else if(year_number_1 % 100 == 0 && year_number_1 % 400 != 0) {
+				total_number_of_days += 28;
+			} else if(year_number_1 % 4 != 0) {
+				total_number_of_days += 28;
 			} else {
-				total_number_of_days += (months_with_thirty_days - date_number_1);
+				total_number_of_days += 29;
+			}
+
+			if(month_number_1 == 12) {
+				year_number_1++;
+				month_number_1 = 1;
+			} else {
+				month_number_1++;
+			}
+				
+		}
+
+		while(month_number_1 < month_number_2) {
+			if (month_number_1 == 2) {
+				if(year_number_1 % 100 == 0 && year_number_1 % 400 != 0) {
+					total_number_of_days += 28;
+				} else if (year_number_1 % 4 == 0) {
+					total_number_of_days += 29;
+				} else {
+					total_number_of_days += 28;
+				}
+			} else if(month_number_1 == 1 ||
+				  month_number_1 == 3 ||
+			  	  month_number_1 == 5 ||
+			 	  month_number_1 == 7 ||
+			 	  month_number_1 == 8 ||
+			 	  month_number_1 == 10 ||
+				  month_number_1 == 12 ) {
+				total_number_of_days += months_with_thirty_one_days;
+			} else {
+				total_number_of_days += months_with_thirty_days;
 			}
 			month_number_1++;
-		}		
+		}
+
+		total_number_of_days += date_number_2;
 			
 	}
 	printf("\nDate#1: %d\n", date_number_1);
