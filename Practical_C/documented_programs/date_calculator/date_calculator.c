@@ -420,13 +420,13 @@ int main() {
 		} else if(month_number_1 != 2) {
 			total_number_of_days += (months_with_thirty_days - date_number_1);
 		} else if(year_number_1 % 100 == 0 && year_number_1 % 400 != 0) {
-			total_number_of_days += 28;
+			total_number_of_days += 28 - date_number_1;
 		} else if(year_number_1 % 4 != 0) {
-			total_number_of_days += 28;
+			total_number_of_days += 28 - date_number_1;
 		} else {
-			total_number_of_days += 29;
+			total_number_of_days += 29 - date_number_1;
 		}
-		
+	
 		if(month_number_1 == 12) {
 			year_number_1++;
 			month_number_1 = 1;
@@ -484,12 +484,8 @@ int main() {
 			}
 			month_number_1++;
 		}
-
 		total_number_of_days += date_number_2;
-			
 	}
-	printf("\nDate#1: %d\n", date_number_1);
-	printf("\nDate#2: %d\n", date_number_2);
 	printf("\nThe total number of days between %s and %s is: %d days\n", date_input_1, date_input_2, total_number_of_days);
 	return(0);
 }
