@@ -20,16 +20,36 @@ int main() {
 	/* variable declarations */
 	char line[100],
 	invalid_characters[100];
-	int entered_number;
+	int valid_input_entered,
+	entered_number;
 	bool is_prime = true;
 
 	/* prompt for and read in number */
-	printf("Enter in a number: \n");
+	printf("Enter in a number: ");
 	fgets(line, sizeof(line), stdin);
-	sscanf(line, "%d", &entered_number);
+	valid_input_entered = sscanf(line, "%d", &entered_number);
+	sscanf(line, "%s", &invalid_characters);
+	for(int i = 0; i < strlen(line); i++) {
+		if(line[i] == '.') {
+			/* value is a float */
+			valid_input_entered = 0;
+		}
+	}
 
 	/* input validation */
-
+	while(valid_input_entered != 1) {
+		printf("\nA valid whole number was not entered in. Please try again.\n");	
+		printf("Enter in a number: ");
+		fgets(line, sizeof(line), stdin);
+		valid_input_entered = sscanf(line, "%d", &entered_number);
+		sscanf(line, "%s", &invalid_characters);
+		for(int i = 0; i < strlen(line); i++) {
+			if(line[i] == '.') {
+				/* value is a float */
+				valid_input_entered = 0;
+			}
+		}
+	}
 
 	/* calculate if number is prime */
 	for(int i = 2; i <= (entered_number / 2); i++) {
@@ -41,9 +61,9 @@ int main() {
 
 	/* output results */
 	if(is_prime) {
-		printf("%d is a prime number.", entered_number);
+		printf("\n%d is a prime number.\n", entered_number);
 	} else {
-		printf("%d is not a prime number.", entered_number);
+		printf("\n%d is not a prime number.\n", entered_number);
 	}
 
 	return(0);
