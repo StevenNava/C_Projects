@@ -40,6 +40,8 @@ int main() {
 	
 	int l = 0;
 	int k = 0;
+	int j = 0;
+	int m = 0;
 	/* for every character aside from ending character */
 	for(int i = 0; i < strlen(line); i++) {
 		if(line[i] != ' ' && line[i] != '\n') {
@@ -47,7 +49,8 @@ int main() {
 			l++;
 			continue;
 		}
-
+		
+		number_string[l] = '\0';
 		l = 0;
 		number_read_successfully = sscanf(number_string, "%d", &all_numbers[k]);
 		if(number_read_successfully != 1) {
@@ -56,11 +59,13 @@ int main() {
 		}
 
 		if(all_numbers[k] >= 0) {
-			positive_numbers[k] = all_numbers[k];
+			positive_numbers[j] = all_numbers[k];
 			positive_number_count++;
+			j++;
 		} else {
-			negative_numbers[k] = all_numbers[k];
+			negative_numbers[m] = all_numbers[k];
 			negative_number_count++;
+			m++;
 		}
 		k++;
 	}
@@ -72,9 +77,12 @@ int main() {
 	/* output results */
 	printf("\nThere are %d positive numbers and %d negative numbers.\n", positive_number_count, negative_number_count);
 	printf("Positive numbers:\n");
-	for(int i = 0; i < k; i++) {
-		if(positive_numbers[i]) {
-			printf("%d\n", positive_numbers[i]);
-		}
+	for(int i = 0; i < j; i++) {
+		printf("%d\n", positive_numbers[i]);
+	}
+
+	printf("Negative numbers:\n");
+	for(int i = 0; i < m; i++) {
+		printf("%d\n", negative_numbers[i]);
 	}
 }
