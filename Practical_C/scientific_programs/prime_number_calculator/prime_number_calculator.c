@@ -30,8 +30,9 @@ int main() {
 
 	/* input validation */
 
+
 	/* calculate if number is prime */
-	for(int i = 1; i < (entered_number / 2); i++) {
+	for(int i = 2; i <= (entered_number / 2); i++) {
 		if(entered_number % i == 0) {
 			is_prime = false;
 			break;
