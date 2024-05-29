@@ -42,11 +42,6 @@ int main() {
 	printf("Enter in a list of numbers with spaces between them: ");
 	fgets(line, sizeof(line), stdin);
 	
-	int l = 0; // number string incrementor
-	int k = 0;
-	int j = 0;
-	int m = 0;
-	/* for every character aside from ending character */
 	for(int i = 0; i < strlen(line); i++) {
 		if(line[i] != ' ' && line[i] != '\n') {
 			number_string[number_string_incrementor] = line[i];
@@ -75,6 +70,47 @@ int main() {
 	}
 
 	/* input validation */
+	while(all_numbers_read_successfully == false) {
+		/* reset values for next read in */
+		number_string_incrementor = 0;
+		all_number_incrementor = 0;
+		positive_number_incrementor = 0;
+		negative_number_incrementor = 0;
+		all_numbers_read_successfully = true;
+
+		/* actual validation */
+		printf("\nValid string of numbers was not entered in. Enter in a string of positive and/or negative whole numbers with spaces between them. Please try again.\n");	
+		printf("Enter in a list of numbers with spaces between them: ");
+		fgets(line, sizeof(line), stdin);
+	
+		/* for every character aside from ending character */
+		for(int i = 0; i < strlen(line); i++) {
+			if(line[i] != ' ' && line[i] != '\n') {
+				number_string[number_string_incrementor] = line[i];
+				number_string_incrementor++;
+				continue;
+			}
+		
+			number_string[number_string_incrementor] = '\0';
+			number_string_incrementor = 0;
+			number_read_successfully = sscanf(number_string, "%d", &all_numbers[all_number_incrementor]);
+			if(number_read_successfully != 1) {
+				all_numbers_read_successfully = false;
+				break;
+			}	
+
+			if(all_numbers[all_number_incrementor] >= 0) {
+				positive_numbers[positive_number_incrementor] = all_numbers[all_number_incrementor];
+				positive_number_count++;
+				positive_number_incrementor++;
+			} else {
+				negative_numbers[negative_number_incrementor] = all_numbers[all_number_incrementor];
+				negative_number_count++;
+				negative_number_incrementor++;
+			}
+			all_number_incrementor++;
+		}
+	}
 
 	/* output results */
 	printf("\nThere are %d positive numbers and %d negative numbers.\n", positive_number_count, negative_number_count);
