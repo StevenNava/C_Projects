@@ -21,11 +21,7 @@ int main() {
 	invalid_characters[50];
 	int number_of_resistors,
 	number_read_in_successfully,
-	numerator,
-	total_numerator,
-	denominator,
-	first_denominator,
-	temporary_value;
+	denominator;
 	double resistor_decimal,
 	total_resistor_value,
 	total_resistance;
@@ -33,11 +29,14 @@ int main() {
 	/* prompt and read in number of resistors */
 	printf("Enter the total number of resistors: ");
 	fgets(line, sizeof(line), stdin);
-	sscanf(line, "%d", &number_of_resistors);
+	number_read_in_successfully = sscanf(line, "%d", &number_of_resistors);
+	sscanf(line, "%s", &invalid_characters);
+	
+	/* input validation */
 
 	/* prompt for all resistors */
-	for(int i = 0; i < number_of_resistors; i++) {
-		printf("\nEnter the resistor denominator: ");
+	for(int i = 1; i <= number_of_resistors; i++) {
+		printf("\nEnter the resistor denominator for resistor %d: ", i);
 		fgets(line, sizeof(line), stdin);
 		sscanf(line, "%d", &denominator);
 
