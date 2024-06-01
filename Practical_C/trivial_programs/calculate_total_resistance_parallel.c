@@ -41,7 +41,7 @@ int main() {
 		total_numerator += numerator_multiplier;
 	}
 
-	total_resistance = denominator / total_numerator;
+	total_resistance = (double)denominator / (double)total_numerator;
 
 	/* output total resistance */
 	printf("\nThe total resistance for %d parallel resistors is %.2lf ohms.\n", number_of_resistors, total_resistance);
