@@ -21,11 +21,10 @@ int main() {
 	int number_of_numbers_to_average, 
 	whole_numbers,
 	partial_numbers,
-	whole_numbers_total,
-	partial_numbers_total,
-	partial_numbers_remainder,
-	parital_numbers_whole_numbers;
-	bool numbers_read_in_successfully = true;
+	whole_numbers_total = 0,
+	partial_numbers_total = 0,
+	i = 1;
+	double average;
 
 	/* read in and store values */
 	while(true) {
@@ -35,7 +34,7 @@ int main() {
 			printf("\nA valid number of numbers to be averaged was not entered in. Please enter in a valid number greater than 2.\n");
 			continue;
 		}
-		for(int i = 0; i < number_of_numbers_to_average; i++) {
+		while(i <= 3) {
 			/* read in variables and input validation */
 			printf("\nEnter number %d: ", i);
 			fgets(line, sizeof(line), stdin);
@@ -45,19 +44,14 @@ int main() {
 			}
 			whole_numbers_total += whole_numbers;
 			partial_numbers_total += partial_numbers;
+			i++;
 		}
 		break;
 	}
-
+	printf("\nWhole Numbers: %d   Partial Numbers: %d \n", whole_numbers_total, partial_numbers_total);
 	/* calculate average and output */
-	if(partial_numbers_total >= 100) {
-		partial_numbers_remainder = partial_numbers_total % 100;
-		whole_numbers_total += (int)partial_numbers_total / 100;
-	}
-
-	partial_numbers_remainder /= number_of_numbers_to_average;
-	whole_numbers_total /= number_of_numbers_to_average;
+	average = (double)((whole_numbers_total * 100) + partial_numbers_total) / (double)(number_of_numbers_to_average * 100);
 	
-	printf("\nThe average of the %d numbers you entered in is %d.%d.\n", &number_of_numbers_to_average, whole_numbers_total, partial_numbers_remainder);
+	printf("\nThe average of the %d numbers you entered in is %.2lf.\n", number_of_numbers_to_average, average);
 	return 0;
 }
