@@ -16,23 +16,25 @@
 
 int main() {
 	/* variable declaration */
-	char line[50],
-	invalid_characters[50];
+	char line[50];
 	int number_of_resistors,
 	numerator = 1,
 	numerator_multiplier,
 	denominator = 400,
-	total_numerator = 1,
-	number_read_in_successfully;
+	total_numerator = 1;
 	double last_denominator = 400,
 	total_resistance;
 
 	/* prompt and read in number of resistors */
-	printf("Enter the number of parallel resistors: ");
-	fgets(line, sizeof(line), stdin);
-	number_read_in_successfully = sscanf(line, "%d", &number_of_resistors);
-	sscanf(invalid_characters, "%s", &invalid_characters);
-	
+	while(1) {
+		printf("Enter the number of parallel resistors: ");
+		fgets(line, sizeof(line), stdin);
+		if(sscanf(line, "%d", &number_of_resistors) == 1) {
+			break;
+		}
+		printf("\nInvalid entry. Enter in a whole number for the number of parallel resistors. Please try again.\n");
+	}
+
 	/* calculate total resistance */
 	for(int i = 1; i < number_of_resistors; i++) {
 		last_denominator /= 2;
