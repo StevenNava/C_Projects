@@ -14,24 +14,46 @@
 
 #include <stdio.h>
 
+/****************************************************************
+ *								*
+ *	Computes the number of words in a string 		*
+ *								*
+ *	Parameters						*
+ *		input - the string to have words counted for	*
+ *								*
+ *	Returns							*
+ *		count - the number of words in the string	*
+ *								*
+ ****************************************************************/
+int Count_Words(char* input) 
+{
+	int count = 0;
+	for(int i = 0; input[i] != '\0'; i++) {
+		if(input[i] == ' ' || input[i] == '\n') {
+			count++;
+		} 
+	}
+	count++;
+	return count;
+}
+
 int main() {
 	/* variable declaration */
 	char line[100],
-	string_of_words;
+	string_of_words[100];
 
 	/* read input and input validation */
 	while(1) {
 		printf("Enter a string of words seperated by spaces: ");
 		fgets(line, sizeof(line), stdin);
-		if(sscanf(line, "%s", &string_of_words) == 1) {
+		/* "%[^\n]s" sets the delimeter for reading in the string to a newline character */
+		if(sscanf(line, "%[^\n]s", &string_of_words) == 1) {
 			break;
 		}
 		printf("\nInvalid input. Please try again.\n");
 	}
-
+	
 	/* output */
-	printf("\nThe number of words in the string you entered is: %d", count_words_in_string(string_of_words));
+	printf("\nThe number of words in the string you entered is: %d", Count_Words(string_of_words));
 	return 0;
 }
-
-/* function for counting words */
