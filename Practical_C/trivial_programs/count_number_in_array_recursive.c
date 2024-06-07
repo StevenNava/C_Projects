@@ -15,6 +15,7 @@
  ************************************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
 
 int count(int number, int number_array[], int length) {
 	int counter = 0;
@@ -42,12 +43,23 @@ int main() {
 	char line[50];
 	int count_of_occurrences = 0,
 	search_number,
-	number_array[10];
+	length_of_array;
 
 	/* prompt for values and input validation */
-	for(int i = 0; i < 10; i++) {
+	while(1) {
+		printf("Enter the number of integers for the array: ");
+		fgets(line, sizeof(line), stdin);
+		if((sscanf(line, "%d", &length_of_array)) == 1) {
+			break;
+		}
+		printf("\nInvalid entry. Enter a valid positive integer. Please try again.\n");
+	}
+
+	int *number_array = malloc(sizeof(int) * length_of_array);
+
+	for(int i = 0; i < length_of_array; i++) {
 		while(1) {
-			printf("Enter number %d for the array: ", i);
+			printf("Enter number %d for the array: ", i + 1);
 			fgets(line, sizeof(line), stdin);
 			if((sscanf(line, "%d", &number_array[i])) == 1) {
 				break;
@@ -67,4 +79,5 @@ int main() {
 
 	count_of_occurrences = count_recursive(search_number, number_array, 10);
 	printf("\nThe count of occurrences for number %d in the string of numbers is: %d times.\n", search_number, count_of_occurrences);
+	free(number_array);
 }
