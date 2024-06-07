@@ -77,7 +77,7 @@ int main() {
 		printf("\nInvalid number to search entered. Please try again.\n");
 	}
 
-	count_of_occurrences = count_recursive(search_number, number_array, 10);
+	count_of_occurrences = count_recursive(search_number, number_array, length_of_array);
 	printf("\nThe count of occurrences for number %d in the string of numbers is: %d times.\n", search_number, count_of_occurrences);
 	free(number_array);
 }
