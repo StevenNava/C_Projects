@@ -46,10 +46,12 @@ int main() {
 	char line[100],
 	input_string[100];
 	int hash;
-
+	
+	/* prompt and reading in character string */
 	while(1) {
 		printf("Enter a string of characters: ");
 		fgets(line, sizeof(line), stdin);
+		/* set delimiter for sscanf to \n character */
 		if((sscanf(line, "%[^\n]s", &input_string)) == 1) {
 			break;
 		}
