@@ -34,7 +34,7 @@
  *		- length of the string		*
  *						*
  ************************************************/
-char *Replace_in_String(char *char_array, char search_char, char replace_char, int length) {
+char* Replace_in_String(char* char_array, char search_char, char replace_char, int length) {
 	if(length == 0) {
 		return char_array;
 	} else {
