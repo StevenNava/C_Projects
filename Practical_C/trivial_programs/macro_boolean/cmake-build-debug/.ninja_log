@@ -1,0 +1,6 @@
+# ninja log v6
+0	18	1717908851652403955	build.ninja	e48d128ed34ea0ac
+0	46	1717908897652409940	CMakeFiles/macro_boolean.dir/macro_boolean.c.o	6bf325ff2baf2925
+46	134	1717908897692409943	macro_boolean	f5cfde927fa3ad9d
+1	23	1717908985172415030	CMakeFiles/macro_boolean.dir/macro_boolean.c.o	6bf325ff2baf2925
+23	89	1717908985192415030	macro_boolean	f5cfde927fa3ad9d
