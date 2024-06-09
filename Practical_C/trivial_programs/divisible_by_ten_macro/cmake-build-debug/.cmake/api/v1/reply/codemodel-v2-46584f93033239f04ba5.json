@@ -1,0 +1,60 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.28"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "divisible_by_ten_macro",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "divisible_by_ten_macro::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-divisible_by_ten_macro-Debug-ed72bce8b0ea6857fb46.json",
+					"name" : "divisible_by_ten_macro",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/loki/C_Projects/Practical_C/trivial_programs/divisible_by_ten_macro/cmake-build-debug",
+		"source" : "/home/loki/C_Projects/Practical_C/trivial_programs/divisible_by_ten_macro"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

@@ -1,0 +1,6 @@
+# ninja log v6
+0	15	1717909632972432782	build.ninja	720f96d8a1eb1e50
+0	25	1717909654452433146	CMakeFiles/divisible_by_ten_macro.dir/divisible_by_ten_macro.c.o	70aa5d16c4af9213
+26	91	1717909654472433147	divisible_by_ten_macro	ac99da4cba674d76
+2	106	1717909696642435109	CMakeFiles/divisible_by_ten_macro.dir/divisible_by_ten_macro.c.o	70aa5d16c4af9213
+109	188	1717909696752435113	divisible_by_ten_macro	ac99da4cba674d76
