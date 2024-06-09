@@ -1,0 +1,7 @@
+# ninja log v6
+1	21	1717962568211858938	CMakeFiles/is_digit_macro.dir/test.c.o	4b4bfcdcdba91e83
+0	21	1717962568211858938	CMakeFiles/is_digit_macro.dir/is_digit_macro.c.o	fb8901dd88c8b357
+2	24	1717964020341913207	build.ninja	2ecf0ba63ac05d16
+1	16	1717964020341913207	build.ninja	2ecf0ba63ac05d16
+0	24	1717964020351913207	CMakeFiles/is_digit_macro.dir/is_digit_macro.c.o	fb8901dd88c8b357
+24	93	1717964020371913208	is_digit_macro	ffa9037132972453
