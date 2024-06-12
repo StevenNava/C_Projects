@@ -49,6 +49,13 @@
     } else { \
         printf("\n'%s' is not a valid decimal digit.\n", input);\
     }
+
+#define IS_HEX(hex_input) \
+    int is_hex = 1, \
+    hex_input[strlen(hex_input) - 1] = '\0'; \
+    for(int i = 0; i < strlen(hex_input); i++) { \
+        if(IS_DIGIT(hex_input)
+
 int main(void) {
     /* variable declaration */
     char line[50];
