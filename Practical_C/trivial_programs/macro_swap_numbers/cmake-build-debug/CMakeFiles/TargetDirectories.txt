@@ -1,0 +1,3 @@
+/home/napoleon/Documents/C_Projects/Practical_C/trivial_programs/macro_swap_numbers/cmake-build-debug/CMakeFiles/macro_swap_numbers.dir
+/home/napoleon/Documents/C_Projects/Practical_C/trivial_programs/macro_swap_numbers/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/napoleon/Documents/C_Projects/Practical_C/trivial_programs/macro_swap_numbers/cmake-build-debug/CMakeFiles/rebuild_cache.dir
