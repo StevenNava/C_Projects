@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/home/loki/C_Projects/Practical_C/trivial_programs/is_digit_macro/cmake-build-debug",
-		"source" : "/home/loki/C_Projects/Practical_C/trivial_programs/is_digit_macro"
+		"build" : "/home/napoleon/Documents/C_Projects/Practical_C/trivial_programs/is_digit_macro/cmake-build-debug",
+		"source" : "/home/napoleon/Documents/C_Projects/Practical_C/trivial_programs/is_digit_macro"
 	},
 	"version" : 
 	{

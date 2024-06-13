@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/is_digit_macro.dir/is_digit_macro.c.o -o is_digit_macro 

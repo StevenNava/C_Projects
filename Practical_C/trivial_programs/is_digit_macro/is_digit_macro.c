@@ -18,10 +18,11 @@
 #include <stdio.h>
 #include <string.h>
 
+/*
 #define IS_DIGIT(input) \
     int is_digit = 1, \
     count_of_decimals = 0; \
-    /* prepare input string for printing out. move back '\0' 1 character, deleting '\n' character */ \
+    // prepare input string for printing out. move back '\0' 1 character, deleting '\n' character  \
     input[strlen(input) - 1] = '\0'; \
     for(int i = 0; i < strlen(input); i++) { \
         if(input[i] == '.') { \
@@ -49,12 +50,32 @@
     } else { \
         printf("\n'%s' is not a valid decimal digit.\n", input);\
     }
+*/
+
+#define IS_DIGIT(input) \
+    /* prepare input string for printing out. move back '\0' 1 character, deleting '\n' character */ \
+    (                   \
+        (input == '1') || \
+        (input == '2') || \
+        (input == '3') || \
+        (input == '4') || \
+        (input == '5') || \
+        (input == '6') || \
+        (input == '7') || \
+        (input == '8') || \
+        (input == '9') \
+    )
 
 #define IS_HEX(hex_input) \
-    int is_hex = 1, \
-    hex_input[strlen(hex_input) - 1] = '\0'; \
-    for(int i = 0; i < strlen(hex_input); i++) { \
-        if(IS_DIGIT(hex_input)
+    (                     \
+        (IS_DIGIT(hex_input) == 1) || \
+        (toupper(hex_input) == 'A') || \
+        (toupper(hex_input) == 'B') || \
+        (toupper(hex_input) == 'C') || \
+        (toupper(hex_input) == 'D') || \
+        (toupper(hex_input) == 'E') || \
+        (toupper(hex_input) == 'F') \
+    )
 
 int main(void) {
     /* variable declaration */
@@ -63,6 +84,11 @@ int main(void) {
     /* read in line value */
     printf("Enter a value for the program to determine if it is a valid decimal digit or not: ");
     fgets(line, sizeof(line), stdin);
-    IS_DIGIT(line)
+    line[1] = '\0';
+    if(IS_HEX(line[0])) {
+        printf("Input is a valid hex character.\n");
+    } else {
+        printf("Input is not a valid hex character.\n");
+    }
     return 0;
 }

@@ -1,4 +1,4 @@
-# Install script for directory: /home/loki/C_Projects/Practical_C/trivial_programs/is_digit_macro
+# Install script for directory: /home/napoleon/Documents/C_Projects/Practical_C/trivial_programs/is_digit_macro
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/loki/C_Projects/Practical_C/trivial_programs/is_digit_macro/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/napoleon/Documents/C_Projects/Practical_C/trivial_programs/is_digit_macro/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
