@@ -28,19 +28,31 @@
                                     }                           \
                                  }                              \
                                  x = x & temp;
-int main(void) {
-    /* int has # positions */
-    int byte;
-    for(int i = 0; i < 8; i++) {
-        /* odd is if(i == 1 || i % 2 != 0) { */
-        if(i == 0 || i % 2 == 0) {
-            SET_BIT_LEFT(byte, i);
-            printf("\n%d\n", byte);
+
+#define TOGGLE_BIT(x, toggle_bit)   for(int i = 0; i < 8; i++) {        \
+                                        if(i == toggle_bit) {           \
+                                            x ^= 0x80 >> toggle_bit;    \
+                                        }                               \
+                                                                        \
+                                     }
+    int main(void) {
+        /* int has # positions */
+        int byte;
+        for(int i = 0; i < 8; i++) {
+            /* odd is if(i == 1 || i % 2 != 0) { */
+            if(i == 0 || i % 2 == 0) {
+                SET_BIT_LEFT(byte, i);
+                printf("\n%d\n", byte);
+            }
         }
-    }
 
-    CLEAR_BIT(byte, 2);
-    printf("\n%d\n", byte);
+        CLEAR_BIT(byte, 2);
+        printf("\n%d\n", byte);
 
+        TOGGLE_BIT(byte, 2);
+        printf("\n%d\n", byte);
+
+        TOGGLE_BIT(byte, 7);
+        printf("\n%d\n", byte);
     return 0;
 }
