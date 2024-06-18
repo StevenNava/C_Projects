@@ -1,0 +1,60 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.28"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "bit_set_bitmap_square",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "bit_set_bitmap_square::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-bit_set_bitmap_square-Debug-fbe6fde982747690aa4b.json",
+					"name" : "bit_set_bitmap_square",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/napoleon/Documents/C_Projects/Practical_C/trivial_programs/bit_set_bitmap_square/cmake-build-debug",
+		"source" : "/home/napoleon/Documents/C_Projects/Practical_C/trivial_programs/bit_set_bitmap_square"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

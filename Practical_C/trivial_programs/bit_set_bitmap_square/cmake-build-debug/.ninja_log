@@ -1,0 +1,9 @@
+# ninja log v6
+0	33	1718681640649046227	CMakeFiles/bit_set_bitmap_square.dir/main.c.o	b08fabc73fcd4fc2
+33	49	1718681640681045737	bit_set_bitmap_square	db282f0bbf8216d8
+1	28	1718681671772572226	CMakeFiles/bit_set_bitmap_square.dir/main.c.o	b08fabc73fcd4fc2
+28	49	1718681671792571923	bit_set_bitmap_square	db282f0bbf8216d8
+0	27	1718681751307379539	CMakeFiles/bit_set_bitmap_square.dir/main.c.o	b08fabc73fcd4fc2
+27	44	1718681751335379123	bit_set_bitmap_square	db282f0bbf8216d8
+0	26	1718681857697808571	CMakeFiles/bit_set_bitmap_square.dir/main.c.o	b08fabc73fcd4fc2
+26	46	1718681857725808160	bit_set_bitmap_square	db282f0bbf8216d8
