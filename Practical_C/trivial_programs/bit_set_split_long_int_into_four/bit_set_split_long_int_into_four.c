@@ -37,9 +37,22 @@
 						} \
 					} 
 
-int main() {
-	long number = 2132080115;
+int main() {\
+	char line[50];
+	long number;
 	int a, b, c, d;
+
+	/* read in long int and parse */
+	while(1) {
+		printf("Enter a number up to a max of 2147483647: ");
+		fgets(line, sizeof(line), stdin);
+		if((sscanf(line, "%ld", &number)) == 1) {
+			break;
+		}
+		printf("\nInvalid number entered. Please try again.\n");
+	}
+
+	/* splits into four ints */
 	SPLIT_BIT(a, b, c, d, number);
 
 	/* print out bits from d to a to get correct comparison */
