@@ -16,18 +16,23 @@
 
 #include <stdio.h>
 
-#define SET_BIT_RIGHT(x, bit_move) (x) |= (0x01 << (bit_move))
+#define SET_BIT_LEFT(x, bit_move) (x) |= (0x01 << (bit_move))
 #define SPLIT_BIT(a, b, c, d, l_int) 	long j = l_int; \
 					for(int i = 0; i < 32; i++) { \
+						/* shift right and take right most bit and \ 
+						 * use & bitwise operator to see if bit is \
+						 * set */ \
 						if(((j >> i) & 0x01) != 0) { \
+							/* since we are splitting a long int \
+							 * we will use i up to 32 */ \
 							if(i <= 7) { \
-								SET_BIT_RIGHT(a, i); \
+								SET_BIT_LEFT(a, i); \
 							} else if(i <= 15) { \
-								SET_BIT_RIGHT(b, i - 8); \
+								SET_BIT_LEFT(b, i - 8); \
 							} else if (i <= 23) {  \
-								SET_BIT_RIGHT(c, i - 16); \
+								SET_BIT_LEFT(c, i - 16); \
 							} else { \
-								SET_BIT_RIGHT(d, i - 24); \
+								SET_BIT_LEFT(d, i - 24); \
 							} \
 						} \
 					} 
@@ -37,6 +42,7 @@ int main() {
 	int a, b, c, d;
 	SPLIT_BIT(a, b, c, d, number);
 
+	/* print out bits from d to a to get correct comparison */
 	printf("\n%d\n%d\n%d\n%d\n", d, c, b, a);
 	return 0;
 }
