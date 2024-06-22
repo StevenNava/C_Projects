@@ -19,18 +19,16 @@
 /* variable declaration */
 struct mailing_label {
 	char full_name[60]; /* last name, first name */
-	char *full_name_first_last; /* name in format first name last name */
+	char full_name_first_last[60]; /* name in format first name last name */
 	char street_address[80];
 	char city[30];
 	int zipcode;
 	char state_code[3];
 };
 
-char* Output_First_Name_Last_Name(char* name_reversed) {
+void Output_First_Name_Last_Name(char* name_reversed, char* full_name_first_last) {
 	char temp_fname[20];
 	char temp_lname[40];
-	char* full_name;
-	full_name = malloc(sizeof(char) * 60);
 	int name_length = strlen(name_reversed);
 
 	for(int i = 0; i < name_length; i++) {
@@ -45,10 +43,9 @@ char* Output_First_Name_Last_Name(char* name_reversed) {
 		j++;
 	}
 
-	strcpy(full_name, temp_fname);
-	strcat(full_name, " ");
-	strcat(full_name, temp_lname);
-	return full_name;
+	strcpy(full_name_first_last, temp_fname);
+	strcat(full_name_first_last, " ");
+	strcat(full_name_first_last, temp_lname);
 }
 
 void Print_Mailing_Labels(struct mailing_label label) {
@@ -80,7 +77,7 @@ int main() {
 	}
 
 	/* sort name and store in full_name_first_last */
-	single_label.full_name_first_last = Output_First_Name_Last_Name(single_label.full_name);
+	Output_First_Name_Last_Name(single_label.full_name, single_label.full_name_first_last);
 
 	/* read in street address */
 	while(1) {
