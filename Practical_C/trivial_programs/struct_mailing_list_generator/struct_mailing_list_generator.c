@@ -27,25 +27,26 @@ struct mailing_label {
 };
 
 void Output_First_Name_Last_Name(char* name_reversed, char* full_name_first_last) {
-	char temp_fname[20];
-	char temp_lname[40];
-	int name_length = strlen(name_reversed);
+	int name_length = strlen(name_reversed), i, j = 0;
 
-	for(int i = 0; i < name_length; i++) {
-		if(name_reversed[i] == ',') {
-			break;
-		}
-		temp_lname[i] = name_reversed[i];
-	}
+	/* find ',' in name signifying end of last name */
+	for(i = 0; name_reversed[i] != ','; i++) { } 
 
-	for(int i = strlen(temp_lname) + 2, j = 0; i < name_length; i++) {
-		temp_fname[j] = name_reversed[i];
+	/* start at 2 characters after finding comma to get to first name */
+	for(i += 2; i < name_length; i++) {
+		full_name_first_last[j] = name_reversed[i];
 		j++;
 	}
 
-	strcpy(full_name_first_last, temp_fname);
-	strcat(full_name_first_last, " ");
-	strcat(full_name_first_last, temp_lname);
+	full_name_first_last[j] = ' '; /* add a space between first and last name */
+	j++;
+
+	/* start back at beginning for last name and go to 2 characters less than first name start */
+	name_length = j - 3;
+	for(i = 0; i < name_length; i++) {
+		full_name_first_last[j] = name_reversed[i];
+		j++;
+	}
 }
 
 void Print_Mailing_Labels(struct mailing_label label) {
