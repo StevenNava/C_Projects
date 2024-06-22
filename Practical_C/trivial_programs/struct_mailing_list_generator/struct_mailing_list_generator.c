@@ -13,15 +13,43 @@
 /* #### TODO: UPDATE PROGRAM TO MANUALLY ALLOCATE NEEDED MEMORY #### */
 
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 /* variable declaration */
 struct mailing_label {
 	char full_name[60]; /* last name, first name */
+	char *full_name_first_last; /* name in format first name last name */
 	char street_address[80];
 	char city[30];
 	int zipcode;
 	char state_code[3];
 };
+
+char* Output_First_Name_Last_Name(char* name_reversed) {
+	char temp_fname[20];
+	char temp_lname[40];
+	char* full_name;
+	full_name = malloc(sizeof(char) * 60);
+	int name_length = strlen(name_reversed);
+
+	for(int i = 0; i < name_length; i++) {
+		if(name_reversed[i] == ',') {
+			break;
+		}
+		temp_lname[i] = name_reversed[i];
+	}
+
+	for(int i = strlen(temp_lname) + 2, j = 0; i < name_length; i++) {
+		temp_fname[j] = name_reversed[i];
+		j++;
+	}
+
+	strcpy(full_name, temp_fname);
+	strcat(full_name, " ");
+	strcat(full_name, temp_lname);
+	return full_name;
+}
 
 void Print_Mailing_Labels(struct mailing_label label) {
 	printf("\n%s\n%s\n%s, %s %d\n", label.full_name, label.street_address, label.city, label.state_code, label.zipcode);
@@ -51,9 +79,12 @@ int main() {
 		}
 	}
 
+	/* sort name and store in full_name_first_last */
+	single_label.full_name_first_last = Output_First_Name_Last_Name(single_label.full_name);
+
 	/* read in street address */
 	while(1) {
-		printf("Enter the street address for %s: ", single_label.full_name);
+		printf("Enter the street address for %s: ", single_label.full_name_first_last);
 		fgets(line, sizeof(line), stdin);
 		if((sscanf(line, "%[^\n]s", &single_label.street_address)) == 1) {
 			break;
