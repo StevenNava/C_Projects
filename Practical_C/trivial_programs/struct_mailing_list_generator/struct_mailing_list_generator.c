@@ -197,7 +197,7 @@ int main() {
 	while(1) {
 		printf("Enter the street address for %s: ", single_label.full_name_first_last);
 		fgets(line, sizeof(line), stdin);
-		if((sscanf(line, "%[^\n]s", &single_label.street_address)) == 1) {
+		if((sscanf(line, "%[^\n]s", &single_label.street_address)) == 1 && (int)single_label.street_address[0] > 48 && (int)single_label.street_address[0] < 58) {
 			break;
 		}
 		printf("Invalid input entered. Please try again.\n");
