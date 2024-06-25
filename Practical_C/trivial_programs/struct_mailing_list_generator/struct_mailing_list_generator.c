@@ -154,8 +154,9 @@ void Output_First_Name_Last_Name(char* name_reversed, char* full_name_first_last
 	full_name_first_last[j] = ' '; /* add a space between first and last name */
 	j++;
 
-	/* start back at beginning for last name and go to 2 characters less than first name start */
-	name_length = j - 3;
+	/* last name length is the total length - current length + 1 ',' */
+	name_length = name_length - (j + 1);
+
 	for(i = 0; i < name_length; i++) {
 		full_name_first_last[j] = name_reversed[i];
 		j++;
