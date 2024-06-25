@@ -171,8 +171,19 @@ void Sort_Mailing_Labels_Zipcode() {
 
 }
 
-void Sort_Mailing_Labels_Name() {
+void Sort_Mailing_Labels_Name(struct mailing_label mailing_labels[], int length) {
+	struct mailing_label min_element;
+	for(int i = 0; i < length; i++) {
+		*min_element = *(mailing_labels[i]);
 
+		for(int j = i + 1; j < length; j++) {
+			if(strcmp(min_element.full_name, mailing_labels[j].full_name) > 0) {
+				*(mailing_labels[i]) = *(mailing_labels[j]);
+				*(mailing_labels[j]) = *min_element;
+				*min_element = *(mailing_labels[i]);
+			}
+		}
+	}
 }
 
 
@@ -256,6 +267,7 @@ int main() {
 		number_of_labels++;
 	}
 	/* sort mailing labels by input method */
+	Sort_Mailing_Labels_Name(mailing_labels, number_of_labels); 
 
 	/* output mailing labels */
 	for(int i = 0; i <= number_of_labels; i++) { 
