@@ -167,23 +167,31 @@ void Print_Mailing_Labels(struct mailing_label label) {
 	printf("\n%s\n%s\n%s, %s %s\n", label.full_name, label.street_address, label.city, label.state_code, label.zipcode);
 }
 
-void Sort_Mailing_Labels_Zipcode() {
-
-}
-
-void Sort_Mailing_Labels_Name(struct mailing_label mailing_labels[], int length) {
-	printf("%d\n", length);
+void Sort_Mailing_Labels(struct mailing_label mailing_labels[], int length, char sort_type) {
 	struct mailing_label temp_element;
-	for(int i = 0; i <= length; i++) {
-		for(int j = i + 1; j <= length; j++) {
-			if(strcmp(mailing_labels[i].full_name, mailing_labels[j].full_name) > 0) {
-				temp_element = mailing_labels[i];
-				mailing_labels[i] = mailing_labels[j];
-				mailing_labels[j] = temp_element;
 
-				printf("i: %s j: %s\n", mailing_labels[i].full_name, mailing_labels[j].full_name);
+	if(sort_type == 'n') {
+		for(int i = 0; i < length; i++) {
+			for(int j = i + 1; j <= length; j++) {
+				if(strcmp(mailing_labels[i].full_name, mailing_labels[j].full_name) > 0) {
+					temp_element = mailing_labels[i];
+					mailing_labels[i] = mailing_labels[j];
+					mailing_labels[j] = temp_element;
+				}
 			}
 		}
+	} else if(sort_type == 'z') {
+		for(int i = 0; i < length; i++) {
+			for(int j = i + 1; j <= length; j++) {
+				if(strcmp(mailing_labels[i].zipcode, mailing_labels[j].zipcode) > 0) {
+					temp_element = mailing_labels[i];
+					mailing_labels[i] = mailing_labels[j];
+					mailing_labels[j] = temp_element;
+				}
+			}
+		}
+	} else {
+		printf("Invalid sort type entered. Items left unsorted.\n");
 	}
 }
 
@@ -268,7 +276,15 @@ int main() {
 		number_of_labels++;
 	}
 	/* sort mailing labels by input method */
-	Sort_Mailing_Labels_Name(labels, number_of_labels); 
+	Sort_Mailing_Labels(labels, number_of_labels, 'n'); 
+
+	/* output mailing labels */
+	for(int i = 0; i <= number_of_labels; i++) { 
+		Print_Mailing_Labels(labels[i]);
+	}
+	
+	/* sort mailing labels by input method */
+	Sort_Mailing_Labels(labels, number_of_labels, 'z'); 
 
 	/* output mailing labels */
 	for(int i = 0; i <= number_of_labels; i++) { 
