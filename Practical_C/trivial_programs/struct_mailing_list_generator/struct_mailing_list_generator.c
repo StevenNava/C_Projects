@@ -195,100 +195,112 @@ void Sort_Mailing_Labels(struct mailing_label mailing_labels[], int length, char
 	}
 }
 
+void Print_Menu() {
+	printf("**********************************************************************************************\n");
+	printf("*											     *\n");
+	printf("*   Make a selection from the options below:						     *\n");
+	printf("*   1 ) Add a label									     *\n");
+	printf("*   2 ) Sort labels by last name and print out						     *\n");
+	printf("*   3 ) Sort labels by zipcode and print out						     *\n");
+	printf("*											     *\n");
+	printf("*   0 ) Exit appplication								     *\n");
+	printf("*											     *\n");
+	printf("**********************************************************************************************\n");
+}
 
 int main() {
 	char line[100],
 	more_labels;
 //	temp_input[100]; // do i need? can i do validation without it?
 	struct mailing_label labels[30];
-	int number_of_labels = 0;
+	int number_of_labels = 0,
+	    menu_choice;
 	
 	/* read in and store mailing labels */
 	/* read in name */
 	while(1) {
 		while(1) {
-			printf("Enter the full name of the person in format last_name, first_name: ");
+			Print_Menu();
 			fgets(line, sizeof(line), stdin);
-			if((sscanf(line, "%[^\n]s", &labels[number_of_labels].full_name)) == 1) {
-				break;
-			}
-		}
-
-		/* sort name and store in full_name_first_last */
-		Output_First_Name_Last_Name(labels[number_of_labels].full_name, labels[number_of_labels].full_name_first_last);
-
-		/* read in street address */
-		while(1) {
-			printf("Enter the street address for %s: ", labels[number_of_labels].full_name_first_last);
-			fgets(line, sizeof(line), stdin);
-			if((sscanf(line, "%[^\n]s", &labels[number_of_labels].street_address)) == 1 && (int)labels[number_of_labels].street_address[0] > 48 && (int)labels[number_of_labels].street_address[0] < 58) {
-				break;
-			}
-			printf("Invalid input entered. Please try again.\n");
-		}	
-
-		/* read in city */
-		while(1) {
-			printf("Enter the city for %s: ", labels[number_of_labels].full_name_first_last);
-			fgets(line, sizeof(line), stdin);
-			if((sscanf(line, "%[^\n]s", &labels[number_of_labels].city)) == 1) {
+			if(((sscanf(line, "%d", &menu_choice)) == 1) && menu_choice >= 0 && menu_choice <= 3) {
 				break;
 			}
 			printf("Invalid input entered. Please try again.\n");
 		}
-
-		/* read in state code */
-		while(1) {
-			printf("Enter the two digit state code for %s: ", labels[number_of_labels].city);
-			fgets(line, sizeof(line), stdin);
-			if((sscanf(line, "%s", &labels[number_of_labels].state_code)) == 1 && State_Is_Valid(labels[number_of_labels].state_code)) {
-				break;
+		if(menu_choice == 1) {
+			while(1) {
+				printf("Enter the full name of the person in format last_name, first_name: ");
+				fgets(line, sizeof(line), stdin);
+				if((sscanf(line, "%[^\n]s", &labels[number_of_labels].full_name)) == 1) {
+					break;
+				}
 			}
-			printf("Invalid input entered. Please try again.\n");
-		}	
+
+			/* sort name and store in full_name_first_last */
+			Output_First_Name_Last_Name(labels[number_of_labels].full_name, labels[number_of_labels].full_name_first_last);
+
+			/* read in street address */
+			while(1) {
+				printf("Enter the street address for %s: ", labels[number_of_labels].full_name_first_last);
+				fgets(line, sizeof(line), stdin);
+				if((sscanf(line, "%[^\n]s", &labels[number_of_labels].street_address)) == 1 && (int)labels[number_of_labels].street_address[0] > 48 && (int)labels[number_of_labels].street_address[0] < 58) {
+					break;
+				}
+				printf("Invalid input entered. Please try again.\n");
+			}		
+
+			/* read in city */
+			while(1) {
+				printf("Enter the city for %s: ", labels[number_of_labels].full_name_first_last);
+				fgets(line, sizeof(line), stdin);
+				if((sscanf(line, "%[^\n]s", &labels[number_of_labels].city)) == 1) {
+					break;
+				}
+				printf("Invalid input entered. Please try again.\n");
+			}
+
+			/* read in state code */
+			while(1) {
+				printf("Enter the two digit state code for %s: ", labels[number_of_labels].city);
+				fgets(line, sizeof(line), stdin);
+				if((sscanf(line, "%s", &labels[number_of_labels].state_code)) == 1 && State_Is_Valid(labels[number_of_labels].state_code)) {
+					break;
+				}
+				printf("Invalid input entered. Please try again.\n");
+			}	
 	
-		/* read in zipcode */
-		while(1) {
-			printf("Enter the zipcode for %s: ", labels[number_of_labels].city);
-			fgets(line, sizeof(line), stdin);
-			// zipcodes are five characters (+ terminating character) and all digits
-			if(strlen(line) == 6 && (sscanf(line, "%s", &labels[number_of_labels].zipcode)) == 1 && Is_All_Numbers(labels[number_of_labels].zipcode)) {
-				break;
+			/* read in zipcode */
+			while(1) {
+				printf("Enter the zipcode for %s: ", labels[number_of_labels].city);
+				fgets(line, sizeof(line), stdin);
+				// zipcodes are five characters (+ terminating character) and all digits
+				if(strlen(line) == 6 && (sscanf(line, "%s", &labels[number_of_labels].zipcode)) == 1 && Is_All_Numbers(labels[number_of_labels].zipcode)) {
+					break;
+				}
+				printf("Invalid input entered. Please try again.\n");
 			}
-			printf("Invalid input entered. Please try again.\n");
-		}
 
-		/* prompt user for more labels */
-		while(1) {
-			printf("Would you like to enter another label? Enter 'y' for yes or 'n' for no: ");
-			fgets(line, sizeof(line), stdin);
-			if((sscanf(line, "%c", &more_labels)) ==1 && (more_labels == 'y' || more_labels == 'n')) {
-				break;
+			/* increase number of labels by 1 */
+			number_of_labels++;
+		} else if(menu_choice == 2) {
+			/* sort mailing labels by input method */
+			Sort_Mailing_Labels(labels, number_of_labels, 'n'); 
+
+			/* output mailing labels */
+			for(int i = 0; i <= number_of_labels; i++) { 
+				Print_Mailing_Labels(labels[i]);
 			}
-			printf("Invalid input entered. Please try again.\n");
-		}
+		} else if(menu_choice == 3) {
+			/* sort mailing labels by input method */
+			Sort_Mailing_Labels(labels, number_of_labels, 'z'); 
 
-		if(more_labels == 'n') {
+			/* output mailing labels */
+			for(int i = 0; i <= number_of_labels; i++) { 
+				Print_Mailing_Labels(labels[i]);
+			}
+		} else {
 			break;
 		}
-		
-		/* increase number of labels by 1 */
-		number_of_labels++;
-	}
-	/* sort mailing labels by input method */
-	Sort_Mailing_Labels(labels, number_of_labels, 'n'); 
-
-	/* output mailing labels */
-	for(int i = 0; i <= number_of_labels; i++) { 
-		Print_Mailing_Labels(labels[i]);
-	}
-	
-	/* sort mailing labels by input method */
-	Sort_Mailing_Labels(labels, number_of_labels, 'z'); 
-
-	/* output mailing labels */
-	for(int i = 0; i <= number_of_labels; i++) { 
-		Print_Mailing_Labels(labels[i]);
 	}
 	return 0;
 }
