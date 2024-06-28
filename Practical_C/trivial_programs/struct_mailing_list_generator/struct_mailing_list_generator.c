@@ -213,7 +213,7 @@ int main() {
 	more_labels;
 //	temp_input[100]; // do i need? can i do validation without it?
 	struct mailing_label labels[30];
-	int number_of_labels = 0,
+	int number_of_labels = -1,
 	    menu_choice;
 	
 	/* read in and store mailing labels */
@@ -228,6 +228,9 @@ int main() {
 			printf("Invalid input entered. Please try again.\n");
 		}
 		if(menu_choice == 1) {
+			/* increase number of labels by 1 */
+			number_of_labels++;
+			
 			while(1) {
 				printf("Enter the full name of the person in format last_name, first_name: ");
 				fgets(line, sizeof(line), stdin);
@@ -280,8 +283,6 @@ int main() {
 				printf("Invalid input entered. Please try again.\n");
 			}
 
-			/* increase number of labels by 1 */
-			number_of_labels++;
 		} else if(menu_choice == 2) {
 			/* sort mailing labels by input method */
 			Sort_Mailing_Labels(labels, number_of_labels, 'n'); 
@@ -296,6 +297,7 @@ int main() {
 
 			/* output mailing labels */
 			for(int i = 0; i <= number_of_labels; i++) { 
+				printf("%d\n", i); 
 				Print_Mailing_Labels(labels[i]);
 			}
 		} else {
