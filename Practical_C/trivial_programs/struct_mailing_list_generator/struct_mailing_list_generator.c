@@ -297,7 +297,6 @@ int main() {
 
 			/* output mailing labels */
 			for(int i = 0; i <= number_of_labels; i++) { 
-				printf("%d\n", i); 
 				Print_Mailing_Labels(labels[i]);
 			}
 		} else {
