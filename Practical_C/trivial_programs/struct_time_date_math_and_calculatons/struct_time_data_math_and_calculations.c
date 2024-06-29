@@ -22,7 +22,15 @@ struct date_time {
 	int number_of_minutes;
 };
 
+int Calculate_Difference_In_Minutes(struct date_time dt1, struct date_time dt2) {
+	int difference_in_minutes = 0;
+	return difference_in_minutes;
+}
+
 int main() {
 	struct date_time dates[2];
+
+	/* calculate difference in minutes and output */
+	printf("\nThe difference in the two date times in minutes is %d minutes.\n", Calculate_Difference_In_Minutes(dates[0], dates[1])); 
 	return 0;
 }
