@@ -20,18 +20,26 @@
 
 struct date_time {
 	char date[12];
-	char time[10];
+	char time[12];
 	int number_of_minutes;
 };
 
 int Calculate_Difference_In_Minutes(struct date_time dt1, struct date_time dt2) {
 	int difference_in_minutes = 0;
+	int dt1_minutes = 0;
+	char temp[5];
+
+	/* calculate # of days difference between dt1 and dt2 */
+	// TODO
+	
+	/* number of days * 24 * 60 (hours & minutes in hour) */
+
 	return difference_in_minutes;
 }
 
 int main() {
 	struct date_time dates[NUM_OF_DATES];
-	char line[10];
+	char line[12];
 	int valid = 1;
 
 	/* read in date and time for both entries */
@@ -40,6 +48,11 @@ int main() {
 			valid = 1;
 			printf("Enter a valid date in mm/dd/yyyy format: ");
 			fgets(line, sizeof(line), stdin);
+			
+			if(strlen(line) < 10) {
+				valid = 0;
+			}
+
 			for(int j = 0; j < strlen(line) - 1; j++) {
 				if((int)line[j] < 47 || (int)line[j] > 57) {
 					valid = 0;
@@ -57,6 +70,11 @@ int main() {
 			valid = 1;
 			printf("Enter a valid time in a 24 hour hh:mm format: ");
 			fgets(line, sizeof(line), stdin);
+			
+			if(strlen(line) < 5) {
+				valid = 0;
+			}
+
 			for(int j = 0; j < strlen(line) - 1; j++) {
 				if((int)line[j] < 48 || (int)line[j] > 58) {
 					valid = 0;
