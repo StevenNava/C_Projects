@@ -15,6 +15,8 @@
  ****************************************************************/
 
 #include <stdio.h>
+#include <string.h>
+#define NUM_OF_DATES 2
 
 struct date_time {
 	char date[12];
@@ -28,7 +30,51 @@ int Calculate_Difference_In_Minutes(struct date_time dt1, struct date_time dt2) 
 }
 
 int main() {
-	struct date_time dates[2];
+	struct date_time dates[NUM_OF_DATES];
+	char line[10];
+	int valid = 1;
+
+	/* read in date and time for both entries */
+	for(int i = 0; i < NUM_OF_DATES; i++) {
+		while(1) {
+			valid = 1;
+			printf("Enter a valid date in mm/dd/yyyy format: ");
+			fgets(line, sizeof(line), stdin);
+			for(int j = 0; j < strlen(line) - 1; j++) {
+				if((int)line[j] < 47 || (int)line[j] > 57) {
+					valid = 0;
+					break;
+				}
+			}
+			if(valid) {
+				strcpy(dates[i].date, line);
+				break;
+			}
+			printf("Invlaid date entered. Please try again.\n");
+		}
+
+		while(1) {
+			valid = 1;
+			printf("Enter a valid time in a 24 hour hh:mm format: ");
+			fgets(line, sizeof(line), stdin);
+			for(int j = 0; j < strlen(line) - 1; j++) {
+				if((int)line[j] < 48 || (int)line[j] > 58) {
+					valid = 0;
+					break;
+				}
+			}
+			if(valid) {
+				strcpy(dates[i].time, line);
+				break;
+			}	
+			printf("Invalid time entered. Please try again.\n");
+		}
+	}
+
+	for(int i = 0; i < NUM_OF_DATES; i++) {
+		printf("Date: %s\n", dates[i].date);
+		printf("Time: %s\n", dates[i].time);
+	}
 
 	/* calculate difference in minutes and output */
 	printf("\nThe difference in the two date times in minutes is %d minutes.\n", Calculate_Difference_In_Minutes(dates[0], dates[1])); 
