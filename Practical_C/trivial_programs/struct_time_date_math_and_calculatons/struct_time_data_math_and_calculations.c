@@ -31,14 +31,128 @@ int Is_Leap_Year(int year) {
 	return 0;
 }
 
+int Calculate_Days_Remaining(int is_leap_year, int month, int date) {
+	int days_remaining = 0,
+	    days_in_month_non_leap_year[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
+	/* handling leap years */
+	if(is_leap_year && month <= 2) {
+		days_remaining += 1;
+	}
+
+	days_remaining += (days_in_month_non_leap_year[month - 1] - date);
+
+	/* month - 1 is to offset for 0/1 indexing */
+	for(int i = month; i < 12; i++) {
+		days_remaining += days_in_month_non_leap_year[i];
+	}
+
+	return days_remaining;
+}
+
+int Calculate_Days_Passed_In_Last_Year(int is_leap_year, int month, int date) {
+	int days_remaining = 0,
+	    days_in_month_non_leap_year[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	
+	/* handling leap years */
+	if(is_leap_year && month > 2) {
+		days_remaining += 1;
+	}
+
+	/* month - 1 is to offset for 0/1 indexing */
+	for(int i = 0; i < month - 1; i++) {
+		days_remaining += days_in_month_non_leap_year[i];
+	}
+
+	days_remaining += date;
+
+	return days_remaining;
+}
+
 int Calculate_Difference_In_Minutes(struct date_time dt1, struct date_time dt2) {
-	int difference_in_minutes = 0;
-	int dt1_minutes = 0;
+	int difference_in_minutes = 0,
+	    dt1_year, 
+	    dt2_year,
+	    dt1_month,
+	    dt2_month,
+	    dt1_date,
+	    dt2_date,
+	    number_of_days = 0;
 	char temp[5];
 
-	/* calculate # of days difference between dt1 and dt2 */
-	// TODO
+	/* get years out and into variables */
+	/* dt1 year */
+	for(int i = strlen(dt1.date) - 5, j = 0; dt1.date[i] != '\0'; i++) {
+		temp[j] = dt1.date[i];
+		j++;
+	}
+	temp[4] = '\0';
+	sscanf(temp, "%d", &dt1_year);
+
+	/* dt2 year */
+	for(int i = strlen(dt2.date) - 5, j = 0; dt2.date[i] != '\0'; i++) {
+		temp[j] = dt2.date[i];
+		j++;
+	}
+	temp[4] = '\0';
+	sscanf(temp, "%d", &dt2_year);
+
+	/* determine largest year and put in dt1 */
+
+	/* calculate # of days difference between dt1 year and dt2 year */
+	while((dt1_year + 1) != dt2_year) {
+		if(Is_Leap_Year(dt1_year)) {
+			number_of_days += 366;
+		} else {
+			number_of_days += 365;
+		}
+		dt1_year++;
+	}
+
+	/* get month and date for dt1 */
+	for(int i = 0; dt1.date[i] != '/'; i++) {
+		temp[i] = dt1.date[i];
+	}
+	temp[2] = '\0';
+	sscanf(temp, "%d", &dt1_month);
+
+	/* 3 is the spot for date start */
+	for(int i = 3, j = 0; dt1.date[i] != '/'; i++) {
+		temp[j] = dt1.date[i];
+		j++;
+	}
+	temp[3] = '\0';
+	sscanf(temp, "%d", &dt1_date);
+
+	/* get month and date for dt2 */
+	for(int i = 0; dt2.date[i] != '/'; i++) {
+		temp[i] = dt2.date[i];
+	}
+	temp[2] = '\0';
+	sscanf(temp, "%d", &dt2_month);
+
+	/* 3 is the spot for date start */
+	for(int i = 3, j = 0; dt2.date[i] != '/'; i++) {
+		temp[j] = dt2.date[i];
+		j++;
+	}
+	temp[3] = '\0';
+	sscanf(temp, "%d", &dt2_date);
 	
+	printf("%d\n", number_of_days);
+	if(Is_Leap_Year(dt1_year - 1)) {
+		number_of_days += Calculate_Days_Remaining(1, dt1_month, dt1_date);
+	} else {
+		number_of_days += Calculate_Days_Remaining(0, dt1_month, dt1_date);
+	}
+	printf("%d\n", number_of_days);
+	if(Is_Leap_Year(dt2_year)) {
+		number_of_days += Calculate_Days_Passed_In_Last_Year(1, dt2_month, dt2_date);
+	} else {
+		number_of_days += Calculate_Days_Passed_In_Last_Year(0, dt2_month, dt2_date);
+	}
+
+	printf("%d\n", number_of_days);
 	/* number of days * 24 * 60 (hours & minutes in hour) */
 
 	return difference_in_minutes;
