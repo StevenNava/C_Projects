@@ -24,6 +24,13 @@ struct date_time {
 	int number_of_minutes;
 };
 
+int Is_Leap_Year(int year) {
+	if(year % 100 == 0 && year % 400 == 0) {
+		return 1;
+	}
+	return 0;
+}
+
 int Calculate_Difference_In_Minutes(struct date_time dt1, struct date_time dt2) {
 	int difference_in_minutes = 0;
 	int dt1_minutes = 0;
