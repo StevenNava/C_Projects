@@ -79,6 +79,8 @@ int Calculate_Difference_In_Minutes(struct date_time dt1, struct date_time dt2) 
 	    dt2_date,
 	    dt1_hours,
 	    dt2_hours,
+	    dt1_minutes,
+	    dt2_minutes,
 	    number_of_days = 0;
 	char temp[5];
 
@@ -99,8 +101,6 @@ int Calculate_Difference_In_Minutes(struct date_time dt1, struct date_time dt2) 
 	temp[4] = '\0';
 	sscanf(temp, "%d", &dt2_year);
 
-	/* determine largest year and put in dt1 */
-
 	/* calculate # of days difference between dt1 year and dt2 year */
 	while((dt1_year + 1) != dt2_year) {
 		if(Is_Leap_Year(dt1_year)) {
@@ -118,7 +118,7 @@ int Calculate_Difference_In_Minutes(struct date_time dt1, struct date_time dt2) 
 	temp[2] = '\0';
 	sscanf(temp, "%d", &dt1_month);
 
-	/* 3 is the spot for date start */
+	/* get month and date for dt1 */
 	for(int i = 3, j = 0; dt1.date[i] != '/'; i++) {
 		temp[j] = dt1.date[i];
 		j++;
@@ -141,21 +141,16 @@ int Calculate_Difference_In_Minutes(struct date_time dt1, struct date_time dt2) 
 	temp[3] = '\0';
 	sscanf(temp, "%d", &dt2_date);
 	
-	printf("%d\n", number_of_days);
 	if(Is_Leap_Year(dt1_year - 1)) {
 		number_of_days += Calculate_Days_Remaining(1, dt1_month, dt1_date);
 	} else {
 		number_of_days += Calculate_Days_Remaining(0, dt1_month, dt1_date);
 	}
-	printf("%d\n", number_of_days);
 	if(Is_Leap_Year(dt2_year)) {
 		number_of_days += Calculate_Days_Passed_In_Last_Year(1, dt2_month, dt2_date);
 	} else {
 		number_of_days += Calculate_Days_Passed_In_Last_Year(0, dt2_month, dt2_date);
 	}
-
-	printf("%d\n", number_of_days);
-	/* number of days * 24 * 60 (hours & minutes in hour) */
 
 	/* read in hour dt1 */
 	for(int i = 0; dt1.time[i] != ':'; i++) {
@@ -171,9 +166,52 @@ int Calculate_Difference_In_Minutes(struct date_time dt1, struct date_time dt2) 
 	temp[2] = '\0';
 	sscanf(temp, "%d", &dt2_hours);
 
-	printf("dt1 hours: %d dt2 hours: %d\n", dt1_hours, dt2_hours);
-	/* determine hour difference */
+	/* calculate minutes from the hour amounts properly */
+	if(dt2_hours < dt1_hours) {
+		/* not a whole day has passed so subtract 1 day */
+		number_of_days--;
 
+		/* subtract first hour difference from a 24 hour day */
+		difference_in_minutes += ((24 - dt1_hours) * 60);
+
+		/* take hours from dt2 and calculate minutes and add it in */
+		difference_in_minutes += dt2_hours * 60;
+	} else { 
+		/* subtract hours of dt1 from dt2 */
+		difference_in_minutes += ((dt2_hours - dt1_hours) * 60);
+	}
+
+	/* get minutes from dt1 */
+	for(int i = 3, j = 0; dt1.time[i] != '\0'; i++) {
+		temp[j] = dt1.time[i];
+		j++;
+	}
+	temp[2] = '\0';
+	sscanf(temp, "%d", &dt1_minutes);
+
+	/* get minutes from dt2 */
+	for(int i = 3, j = 0; dt2.time[i] != '\0'; i++) {
+		temp[j] = dt2.time[i];
+		j++;
+	}
+	temp[2] = '\0';
+	sscanf(temp, "%d", &dt2_minutes);
+
+	/* calculate minutes difference */
+	if(dt2_minutes < dt1_minutes) {
+		/* subtract 60 minutes from difference in minutes */
+		difference_in_minutes -= 60;
+
+		/* subtract minutes from first time from 60 */
+		difference_in_minutes += 60 - dt1_minutes;
+		/* add minutes from dt2 */
+		difference_in_minutes += dt2_minutes;
+	} else {
+		difference_in_minutes += (dt2_minutes - dt1_minutes);
+	}
+
+	/* calculate minutes -- number of days * 24 hours * 60 minutes */
+	difference_in_minutes += (number_of_days * 24 * 60);
 	return difference_in_minutes;
 }
 
