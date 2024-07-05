@@ -77,6 +77,8 @@ int Calculate_Difference_In_Minutes(struct date_time dt1, struct date_time dt2) 
 	    dt2_month,
 	    dt1_date,
 	    dt2_date,
+	    dt1_hours,
+	    dt2_hours,
 	    number_of_days = 0;
 	char temp[5];
 
@@ -154,6 +156,23 @@ int Calculate_Difference_In_Minutes(struct date_time dt1, struct date_time dt2) 
 
 	printf("%d\n", number_of_days);
 	/* number of days * 24 * 60 (hours & minutes in hour) */
+
+	/* read in hour dt1 */
+	for(int i = 0; dt1.time[i] != ':'; i++) {
+		temp[i] = dt1.time[i];
+	}
+	temp[2] = '\0';
+	sscanf(temp, "%d", &dt1_hours);
+	
+	/* read in hour dt2 */
+	for(int i = 0; dt2.time[i] != ':'; i++) {
+		temp[i] = dt2.time[i];
+	}
+	temp[2] = '\0';
+	sscanf(temp, "%d", &dt2_hours);
+
+	printf("dt1 hours: %d dt2 hours: %d\n", dt1_hours, dt2_hours);
+	/* determine hour difference */
 
 	return difference_in_minutes;
 }
